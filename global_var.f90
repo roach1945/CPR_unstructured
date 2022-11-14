@@ -132,7 +132,7 @@ module parameter_setting
     integer :: case_comp = 0            
     integer,parameter :: equEntropy_case = 0, SodShockTube_case = 1, LaxShockTube_case = 2,ShuOsher_case = 3,Riemann2D_case = 4,&
                          DoubleMach_case = 5, VortexShock_case  = 6, CompositeVortexShock_case = 7,HyperCylinder_case = 8,test_case = 99,&
-                         WingFlow_case   = 9, steadyShock_case = 10, SinWave_2D_case = 11
+                         WingFlow_case   = 9, steadyShock_case = 10, SinWave_2D_case = 11, Doublerarefaction_1D_case=12
     
     ! 激波管问题激波运动方向. x, y
     integer :: dire_shock = 0

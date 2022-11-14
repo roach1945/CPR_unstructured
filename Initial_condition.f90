@@ -123,6 +123,15 @@ subroutine set_IC
                 end do
             end do
         end do
+    case(Doublerarefaction_1D_case)     !Ò»Î¬Ï¡Êè²¨ÎÊÌâ
+        do i = 1,ncells+nbdsides
+            allocate(cellset(i).spvalue_ori(nsp,nsp,4))
+            do j = 1,nsp      
+                do k = 1,nsp
+                    !call Euler_1D_order_init(cellset(i).sp_coor(j,k,:),0.0,cellset(i).spvalue_ori(j,k,1:4))
+                end do
+            end do
+        end do
     case(test_case)
         do i = 1,ncells+nbdsides
             allocate(cellset(i).spvalue_ori(nsp,nsp,4))
@@ -389,6 +398,36 @@ subroutine Euler_1D_order_init(coor,time,ruvp)
         ruvp(4)=p_R  
     end select
 end subroutine Euler_1D_order_init
+
+    
+subroutine Doublerarefaction_1D_init(coor,ruvp)
+
+    use global_var
+    use parameter_setting
+    implicit none
+    real(prec) :: x,y,r,u,v,p,ruvp(1:4)
+    real(prec),dimension(:) :: coor(2)
+    real(prec) :: rho_L,u_L,v_L,p_L
+    real(prec) :: rho_R,u_R,v_R,p_R  
+    
+    rho_L = 7.0_prec
+    u_L = -1.0_prec
+    v_L = 0.0_prec
+    p_L = 0.2_prec   
+        
+    rho_R = 7.0_prec
+    u_R = 1.0_prec
+    v_R = 0.0_prec
+    p_R = 0.2_prec 
+
+
+
+
+end subroutine Doublerarefaction_1D_init
+
+
+
+
 subroutine Riemann2D_init(coor,ruvp)
 
     use global_var
@@ -397,35 +436,7 @@ subroutine Riemann2D_init(coor,ruvp)
     
     real(prec) :: x,y,r,u,v,p,ruvp(1:4)
     real(prec),dimension(:) :: coor(2)
-        
-    x = coor(1)
-    y = coor(2)
-
-    if(x>=0.8_prec .and. x<=1.0_prec .and. y>=0.8_prec .and. y<=1.0_prec)then
-        r = 1.5_prec
-        u = 0.0_prec
-        v = 0.0_prec
-        p = 1.5_prec
-    elseif(x>=0.0_prec .and. x<0.8_prec .and. y>=0.8_prec .and. y<=1.0_prec)then
-        r = 0.5323_prec
-        u = 1.206_prec
-        v = 0.0_prec
-        p = 0.3_prec   
-    elseif(x>=0.0_prec .and. x<0.8_prec .and. y>=0.0_prec .and. y<0.8_prec)then
-        r = 0.138_prec
-        u = 1.206_prec
-        v = 1.206_prec
-        p = 0.029_prec 
-    elseif(x>=0.8_prec .and. x<=1.0_prec .and. y>=0.0_prec .and. y<0.8_prec)then
-        r = 0.5323_prec
-        u = 0.0_prec
-        v = 1.206_prec
-        p = 0.3_prec 
-    endif
-    ruvp(1) = r
-    ruvp(2) = u
-    ruvp(3) = v
-    ruvp(4) = p
+ 
 end subroutine Riemann2D_init
 
 subroutine DoubleMach_init(coor,ruvp)

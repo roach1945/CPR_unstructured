@@ -1,0 +1,84 @@
+&prePARA
+compuPurpose = 0							!测误差，测精度.error_solve = 0,order_solve = 1,order_solve2 = 2 
+compuConsLaw = 0							!测离散守恒率，consLaw_close = 0,consLaw_open = 1
+compuResidua = 0							!测残差 residua_no = 0,residua_yes = 1
+trouCell_record = 1                         !记录问题单元 trouCell_no = 0,trouCell_yes = 1
+
+/
+
+&PARA
+solver_dim	   = 2,						    !求解器维度，dim_1D = 1, dim_2D = 2   1维的没加呢，，
+nsp_set		= 3,							!#nsp_set，求解点个数
+cfl			= 0.1d0
+
+T			= 0.6d0							!计算时间
+print_step  = 20000,							!结果输出步数
+
+dt_switch = 0							    !时间步长 自适应 dt_adapt = 0 dt = cfl*dx^(nsp/3),  固定dt_fixed = 1
+dt		  = 0.0001d0,						!T = nstep * dt ,  固定dt  = 1。dt_switch = 0 忽略此项
+
+!------侦测类型------
+detection_type = 0,							!#detection_TVB = 0,detection_ATV = 1,detection_MV = 2,detection_MDH = 3,detection_MDHm = 4,detection_KXRCF = 5,detection_JST = 6
+TVB_M		= 100.0d0,						!TVB侦测M
+efix		= 0.1d0							!Roe Riemann Flux,熵修正
+d_smooth	= 0.0d0							!权值函数过渡，d_smooth	= 0.0d0	等价于不使用过渡函数，平时取d_smooth= 4.0d0	。论文里的 $\kappa$。。权值函数过渡还没什么太大意义，设为0就好，以后可以改
+
+!------算例---------
+case_comp	= 12,							!#case_comp		0 -- 等熵涡；1 -- sod激波管；2 -- lax激波管；3 -- ShuOsher_case；4 -- Riemann2D_case；
+											!				5 -- DoubleMach_case,6 -- VortexShock_case;7--CompositeVortexShock_case;HyperCylinder_case = 8
+											!				WingFlow_case = 9, steadyShock_case = 10,SinWave_2D_case = 11,Doublerarefaction_1D_case=12
+! Ms--激波强度
+Ms			= 1.5d0, 
+
+! attackAngle 攻角   NACA0012 M = 0.8,alpha = 1.25°;RAE2822 M = 0.73,alpha = 2.79°
+attackAngle = 0.0d0,
+
+! Mv--涡强度；CompositeVortexShock_case 激波-旋涡干扰算例：
+Mv			= 0.9d0,
+
+!------网格------
+grid_set	= 0,			!#grid_set		!0 -- self generate；	1 -- fluent cas mesh
+
+!------若采取fluent网格------------------
+!qua_equEntropy.cas,			! shockTube2.3_bc.cas,		!2D_Riemann100_1B.cas		!  doubleMach240_1B.cas
+!vortexshock4_2004.cas			! vortexshock16372.cas		!HyperCylinder.cas			
+!hyper.cas						! Rae2822_Coarse.cas		!hyper-cyblinder-40-20.cas	!hyper-cyblinder-rect.cas
+!HyperCylinder_stru40_80.cas	! rae2822-0826-pw2.cas		! NACA0012-unit.cas !NACA0012-uniform.cas  !vortexshock6.cas !NACA0012-uniform3-2.cas!
+
+mesh_file  = doubleMach240_1B.cas !qua_equEntropy.cas!squ_80.cas!vortexshock4_2004.cas!doubleMach240_1B.cas
+
+!!-------------------------------------------
+!------若自己生成网格，均匀分布网格--------------------
+xl		= -1.0d0,
+xr		= 1.0d0,
+yl		= -1.0d0,
+yr		= 1.0d0,
+nsdx =	10,				!# x方向单元数
+nsdy =  10,
+grid_type	= 0,		!#grid_type		!0 -- 直网格；	1 -- 曲网格
+cell_shape	= 0,						!0 -- 矩形；	1 -- 梯形；		2 -- 扰动网格    zhi/zhe
+!!-----------------------------------------------------
+
+fluxD_type	= 0,		!#fluxD_type	!0 -- Larange Polynomial; 1 -- Chain Rule	
+sp_type     = 0,		!#sp_type		!0 -- Gauss点；	1 -- Lobatto点； 2 -- Equidistant_p等距点
+fp_type		= 1,        !#fp_type		!0 -- Labotto点；1 -- Gauss Weight点； 2 -- 等距点
+dire_shock	= 0,		!				!0 -- x; 1 -- y,控制激波管算例速度方向
+var_type	= 1,		!#var_type		!C2NNW2插值所用 0 -- 原始变量；1 -- 特征变量
+/
+!----调试程序------------------------------------------
+&PARA_debug
+ 
+method_subcell = 0,                            !通量计算左右值插值方法  method_NNW = 0, method_Godunov = 1
+method_ori_fp  = 0,                            !NNW获得单元边界通量点处初始值的方法  TPs_weight_NNW = 0, MPs_weight_NNW = 1, TTPsL_ave_NNW = 2      !两点反距离加权，多点反距离加权,两单元两点线性插值再平均
+method_adv_Der = 0,                            !NNW求对流项导数方法  Operator_2Ps = 0, Operator_3Ps = 1      !两点，三点
+detect_type    = 0,							  !分维 ByDim = 0;单元ByCell = 1
+buffer_cell_switch = 0,						  !是否加过渡单元 buffer_cell_no = 0，buffer_cell_yes = 1；加上鲁棒性会好点
+
+scheme_kind   = 0,   						  !计算格式 scheme_cpr = 0，scheme_two = 1，scheme_hybrid = 2；
+switch_updown = 0,							  !格式切换方法  close_updown = 0,open_updown = 1 
+
+limiter_switch = 1,							  !插值限制器是否打开 limiter_close = 0, limiter_open = 1
+fluxDer_switch = 0,							  !通量导数求解:nsp求解点，nsp+1通量点. fluxDer_SPs = 0, fluxDer_FPs = 1
+Riemann_flux = 0,                             !Riemann通量 LLF_flux = 0,Roe_flux = 1
+    
+/
