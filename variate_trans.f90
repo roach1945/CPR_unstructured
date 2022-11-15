@@ -57,7 +57,7 @@ end subroutine ori_to_flu
 
 
 subroutine con_to_ori
-    !原始变量装换到守恒变量
+    !原始变量转换到守恒变量
     use global_var
     use type_module
     implicit none

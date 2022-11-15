@@ -129,10 +129,7 @@ subroutine set_IC
             do j = 1,nsp      
                 do k = 1,nsp
                     !call DoubleMach_init(cellset(i).sp_coor(j,k,:),cellset(i).spvalue_ori(j,k,1:4))
-                    !call Doublerarefaction_1D_init(cellset(i).sp_coor(j,k,:),cellset(i).spvalue_ori(j,k,1:4))
-                    !print*,cellset(i).sp_coor(j,k,:)
-                    !print*,cellset(i).spvalue_ori(j,k,1:4)
-                    !pause
+                    call Doublerarefaction_1D_init(cellset(i).sp_coor(j,k,:),cellset(i).spvalue_ori(j,k,1:4))
                 end do
             end do
         end do
