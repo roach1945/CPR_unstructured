@@ -410,7 +410,7 @@ subroutine Doublerarefaction_1D_init(coor,ruvp)
     real(prec) :: rho_L,u_L,v_L,p_L  
     real(prec) :: rho_R,u_R,v_R,p_R 
     real(prec) :: time    
-
+    
     rho_L=7.0_prec
     u_L=-1.0_prec
     v_L=0.0_prec
@@ -422,24 +422,27 @@ subroutine Doublerarefaction_1D_init(coor,ruvp)
     p_R=0.2_prec
     x = coor(1)
     y = coor(2)
-    !
-    !if(y < sqrt(3.0_prec)*(x - 1.0_prec/6.0_prec))then
-    !    r = 1.4_prec
-    !    u = 0.0_prec
-    !    v = 0.0_prec
-    !    p = 1.0_prec
-    !elseif(y >= sqrt(3.0_prec)*(x - 1.0_prec/6.0_prec))then
-    !    r = 8.0_prec
-    !    u = 7.145_prec
-    !    v = -4.125_prec
-    !    p = 116.5_prec   
-    !endif
-    !!Refs: [1]Guo J, Zhu H, Yan Z-G, et al. High-Order Hybrid WCNS-CPR Scheme for Shock Capturing of Conservation Laws [J]. 
-    !!         International Journal of Aerospace Engineering, 2020, 2020: 1-13.
-    !ruvp(1) = r
-    !ruvp(2) = u
-    !ruvp(3) = v
-    !ruvp(4) = p
+    if(sp_type==1)then
+        if(x<0)then
+            r = rho_L
+            u = u_L
+            v = v_L
+            p = p_L
+        else if(x>0)then
+            r = rho_R
+            u = u_R
+            v = v_R
+            p = p_R  
+        end if
+    else
+        print*,'除了lobatto点还未实现别的点类型的算例'
+        pause
+        stop
+    end if
+    ruvp(1) = r
+    ruvp(2) = u
+    ruvp(3) = v
+    ruvp(4) = p
 
 end subroutine Doublerarefaction_1D_init
 
