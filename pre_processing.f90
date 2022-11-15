@@ -264,7 +264,9 @@ subroutine SPs_setting
     case(Lobatto_p)
 
         ! TODO
-            
+        SPs=LPs 
+
+        pause   
     case(Equidistant_p)    
         dh = 2.0_prec / real(nsp)
         do i = 1,nsp
@@ -419,6 +421,8 @@ subroutine Lobatto_points_set
     !   返回：
     !   作者：gqShi 
     !   历史：修改求解Lobatto点，可以生成任意点的点值和权值（当然实际上也有限制，和程序实现有关，参见程序get_Lobatto_Point_Weight）//2021.12.15
+    !   这里面不知道为什么Lobatto点的个数比预先设定多1个，先接受这个设定
+    !   观察了斐然师兄的程序里面Lobatto点个数和解点数一致的，先不进行修改
     !-----------------------------------------------------------------------------
 
     use global_var
