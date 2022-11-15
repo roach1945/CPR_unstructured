@@ -128,7 +128,11 @@ subroutine set_IC
             allocate(cellset(i).spvalue_ori(nsp,nsp,4))
             do j = 1,nsp      
                 do k = 1,nsp
-                    !call Euler_1D_order_init(cellset(i).sp_coor(j,k,:),0.0,cellset(i).spvalue_ori(j,k,1:4))
+                    !call DoubleMach_init(cellset(i).sp_coor(j,k,:),cellset(i).spvalue_ori(j,k,1:4))
+                    !call Doublerarefaction_1D_init(cellset(i).sp_coor(j,k,:),cellset(i).spvalue_ori(j,k,1:4))
+                    !print*,cellset(i).sp_coor(j,k,:)
+                    !print*,cellset(i).spvalue_ori(j,k,1:4)
+                    !pause
                 end do
             end do
         end do
@@ -409,7 +413,7 @@ subroutine Doublerarefaction_1D_init(coor,ruvp)
     real(prec),dimension(:) :: coor(2)
     real(prec) :: rho_L,u_L,v_L,p_L  
     real(prec) :: rho_R,u_R,v_R,p_R 
-    real(prec) :: time    
+  
     
     rho_L=7.0_prec
     u_L=-1.0_prec
@@ -422,7 +426,7 @@ subroutine Doublerarefaction_1D_init(coor,ruvp)
     p_R=0.2_prec
     x = coor(1)
     y = coor(2)
-    if(sp_type==1)then
+    if(sp_type==0)then
         if(x<0)then
             r = rho_L
             u = u_L
@@ -435,7 +439,7 @@ subroutine Doublerarefaction_1D_init(coor,ruvp)
             p = p_R  
         end if
     else
-        print*,'除了lobatto点还未实现别的点类型的算例'
+        print*,'除了Gauss点还未实现别的点类型的算例'
         pause
         stop
     end if
