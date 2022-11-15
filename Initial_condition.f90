@@ -407,21 +407,39 @@ subroutine Doublerarefaction_1D_init(coor,ruvp)
     implicit none
     real(prec) :: x,y,r,u,v,p,ruvp(1:4)
     real(prec),dimension(:) :: coor(2)
-    real(prec) :: rho_L,u_L,v_L,p_L
-    real(prec) :: rho_R,u_R,v_R,p_R  
-    
-    rho_L = 7.0_prec
-    u_L = -1.0_prec
-    v_L = 0.0_prec
-    p_L = 0.2_prec   
-        
-    rho_R = 7.0_prec
-    u_R = 1.0_prec
-    v_R = 0.0_prec
-    p_R = 0.2_prec 
+    real(prec) :: rho_L,u_L,v_L,p_L  
+    real(prec) :: rho_R,u_R,v_R,p_R 
+    real(prec) :: time    
 
+    rho_L=7.0_prec
+    u_L=-1.0_prec
+    v_L=0.0_prec
+    p_L=0.2_prec
 
-
+    rho_R=7.0_prec
+    u_R=1.0_prec
+    v_R=0.0_prec
+    p_R=0.2_prec
+    x = coor(1)
+    y = coor(2)
+    !
+    !if(y < sqrt(3.0_prec)*(x - 1.0_prec/6.0_prec))then
+    !    r = 1.4_prec
+    !    u = 0.0_prec
+    !    v = 0.0_prec
+    !    p = 1.0_prec
+    !elseif(y >= sqrt(3.0_prec)*(x - 1.0_prec/6.0_prec))then
+    !    r = 8.0_prec
+    !    u = 7.145_prec
+    !    v = -4.125_prec
+    !    p = 116.5_prec   
+    !endif
+    !!Refs: [1]Guo J, Zhu H, Yan Z-G, et al. High-Order Hybrid WCNS-CPR Scheme for Shock Capturing of Conservation Laws [J]. 
+    !!         International Journal of Aerospace Engineering, 2020, 2020: 1-13.
+    !ruvp(1) = r
+    !ruvp(2) = u
+    !ruvp(3) = v
+    !ruvp(4) = p
 
 end subroutine Doublerarefaction_1D_init
 
