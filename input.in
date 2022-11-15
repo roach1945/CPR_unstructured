@@ -60,8 +60,8 @@ cell_shape	= 0,						!0 -- 矩形；	1 -- 梯形；		2 -- 扰动网格    zhi/zhe
 !!-----------------------------------------------------
 
 fluxD_type	= 0,		!#fluxD_type	!0 -- Larange Polynomial; 1 -- Chain Rule	
-sp_type     = 1,		!#sp_type		!0 -- Gauss点；	1 -- Lobatto点； 2 -- Equidistant_p等距点
-fp_type		= 0,        !#fp_type		!0 -- Lobatto点；1 -- Gauss Weight点； 2 -- 等距点
+sp_type     = 0,		!#sp_type		!0 -- Gauss点；	1 -- Lobatto点； 2 -- Equidistant_p等距点
+fp_type		= 1,        !#fp_type		!0 -- Lobatto点；1 -- Gauss Weight点； 2 -- 等距点
 dire_shock	= 0,		!				!0 -- x; 1 -- y,控制激波管算例速度方向
 var_type	= 1,		!#var_type		!C2NNW2插值所用 0 -- 原始变量；1 -- 特征变量
 /
