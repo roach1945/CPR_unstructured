@@ -11,7 +11,7 @@ solver_dim	   = 2,						    !Çó½âÆ÷Î¬¶È£¬dim_1D = 1, dim_2D = 2   1Î¬µÄÃ»¼ÓÄØ£¬£
 nsp_set		= 3,							!#nsp_set£¬Çó½âµã¸öÊı
 cfl			= 0.1d0
 
-T			= 0.6d0							!¼ÆËãÊ±¼ä
+T			= 0.1d0							!¼ÆËãÊ±¼ä
 print_step  = 20000,							!½á¹ûÊä³ö²½Êı
 
 dt_switch = 0							    !Ê±¼ä²½³¤ ×ÔÊÊÓ¦ dt_adapt = 0 dt = cfl*dx^(nsp/3),  ¹Ì¶¨dt_fixed = 1
@@ -24,7 +24,7 @@ efix		= 0.1d0							!Roe Riemann Flux,ìØĞŞÕı
 d_smooth	= 0.0d0							!È¨Öµº¯Êı¹ı¶É£¬d_smooth	= 0.0d0	µÈ¼ÛÓÚ²»Ê¹ÓÃ¹ı¶Éº¯Êı£¬Æ½Ê±È¡d_smooth= 4.0d0	¡£ÂÛÎÄÀïµÄ $\kappa$¡£¡£È¨Öµº¯Êı¹ı¶É»¹Ã»Ê²Ã´Ì«´óÒâÒå£¬ÉèÎª0¾ÍºÃ£¬ÒÔºó¿ÉÒÔ¸Ä
 
 !------ËãÀı---------
-case_comp	= 12,							!#case_comp		0 -- µÈìØÎĞ£»1 -- sod¼¤²¨¹Ü£»2 -- lax¼¤²¨¹Ü£»3 -- ShuOsher_case£»4 -- Riemann2D_case£»
+case_comp	= 0,							!#case_comp		0 -- µÈìØÎĞ£»1 -- sod¼¤²¨¹Ü£»2 -- lax¼¤²¨¹Ü£»3 -- ShuOsher_case£»4 -- Riemann2D_case£»
 											!				5 -- DoubleMach_case,6 -- VortexShock_case;7--CompositeVortexShock_case;HyperCylinder_case = 8
 											!				WingFlow_case = 9, steadyShock_case = 10,SinWave_2D_case = 11,Doublerarefaction_1D_case=12
 ! Ms--¼¤²¨Ç¿¶È
@@ -49,12 +49,12 @@ mesh_file  = doubleMach240_1B.cas !qua_equEntropy.cas!squ_80.cas!vortexshock4_20
 
 !!-------------------------------------------
 !------Èô×Ô¼ºÉú³ÉÍø¸ñ£¬¾ùÔÈ·Ö²¼Íø¸ñ--------------------
-xl		= -1.0d0,
-xr		= 1.0d0,
-yl		= -1.0d0,
+xl		= -10.0d0,
+xr		= 10.0d0,
+yl		= -10.0d0,
 yr		= 1.0d0,
-nsdx =	10,				!# x·½Ïòµ¥ÔªÊı
-nsdy =  10,
+nsdx =	20,				!# x·½Ïòµ¥ÔªÊı
+nsdy =  20,
 grid_type	= 0,		!#grid_type		!0 -- Ö±Íø¸ñ£»	1 -- ÇúÍø¸ñ
 cell_shape	= 0,						!0 -- ¾ØĞÎ£»	1 -- ÌİĞÎ£»		2 -- ÈÅ¶¯Íø¸ñ    zhi/zhe
 !!-----------------------------------------------------
