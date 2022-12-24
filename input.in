@@ -77,7 +77,7 @@ buffer_cell_switch = 0,						  !是否加过渡单元 buffer_cell_no = 0，buffer_cell_y
 scheme_kind   = 0,   						  !计算格式 scheme_cpr = 0，scheme_two = 1，scheme_hybrid = 2；
 switch_updown = 0,							  !格式切换方法  close_updown = 0,open_updown = 1 
 
-limiter_switch = 0,							  !插值限制器是否打开 limiter_close = 0, limiter_open = 1
+limiter_switch = 1,							  !插值限制器是否打开 limiter_close = 0, limiter_open = 1
 fluxDer_switch = 0,							  !通量导数求解:nsp求解点，nsp+1通量点. fluxDer_SPs = 0, fluxDer_FPs = 1
 Riemann_flux = 0,                             !Riemann通量 LLF_flux = 0,Roe_flux = 1
     
